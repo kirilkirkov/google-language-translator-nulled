@@ -321,21 +321,9 @@ class google_language_translator {
       $language_name_flag = 'brazil';
     }
 
-    $href = '#';
-    if($glt_seo_active == '1') {
-        $current_url = network_home_url(add_query_arg(null, null));
-        switch($glt_url_structure) {
-            case 'sub_directory':
-                $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                break;
-            case 'sub_domain':
-                $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                break;
-            default:
-                break;
-        }
-    }
+    $current_url = network_home_url(add_query_arg(null, null));
+    $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
+
 
     return "<a href='".esc_url($href)."' class='nturl notranslate ".esc_attr($language_code)." ".esc_attr($language_name_flag)." single-language flag' title='".esc_attr($language)."'>".($image=='yes' ? "<span class='flag size".esc_attr($image_size)."'></span>" : '') .($text=='yes' ? htmlspecialchars($label) : '')."</a>";
   }
@@ -395,21 +383,9 @@ class google_language_translator {
                 $language_name_flag = 'brazil';
               }
 
-              $href = '#';
-              if($glt_seo_active == '1') {
-                $current_url = network_home_url(add_query_arg(null, null));
-                switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                }
-              }
+              $current_url = network_home_url(add_query_arg(null, null));
+              $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
+
 
               $str .= '<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
             } //empty
@@ -434,21 +410,9 @@ class google_language_translator {
                 $language_name_flag = 'brazil';
               }
 
-              $href = '#';
-              if($glt_seo_active == '1') {
-                $current_url = network_home_url(add_query_arg(null, null));
-                switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                }
-              }
+              $current_url = network_home_url(add_query_arg(null, null));
+              $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
+
 
               $str.='<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
             } //foreach
@@ -470,22 +434,9 @@ class google_language_translator {
             if ( $language_name == 'Portuguese' && $portuguese_flag_choice == 'brazilian_flag') {
               $language_name_flag = 'brazil';
             }
+            $current_url = network_home_url(add_query_arg(null, null));
+            $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
 
-            $href = '#';
-            if($glt_seo_active == '1') {
-                $current_url = network_home_url(add_query_arg(null, null));
-                switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                }
-            }
 
             $str.='<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
           }//foreach
@@ -567,21 +518,9 @@ class google_language_translator {
               $language_name_flag = 'brazil';
             }
 
-            $href = '#';
-            if($glt_seo_active == '1') {
-                $current_url = network_home_url(add_query_arg(null, null));
-                switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            $current_url = network_home_url(add_query_arg(null, null));
+            $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
+
 
             $str.="<li id='".$language_name."'><a href='".esc_url($href)."' title='".$language_name."' class='nturl notranslate ".$language_code." flag ".$language_name_flag."'></a></li>";
           } //endif
@@ -606,21 +545,9 @@ class google_language_translator {
                 $language_name_flag = 'brazil';
               }
 
-              $href = '#';
-              if($glt_seo_active == '1') {
-                  $current_url = network_home_url(add_query_arg(null, null));
-                  switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                  }
-              }
+              $current_url = network_home_url(add_query_arg(null, null));
+              $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
+
 
               $str.='<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
             } //foreach
@@ -644,20 +571,10 @@ class google_language_translator {
               }
 
               $href = '#';
-              if($glt_seo_active == '1') {
+              // if($glt_seo_active == '1') {
                   $current_url = network_home_url(add_query_arg(null, null));
-                  switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                  }
-              }
+                  $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
+              // }
 
               $str.='<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
             }//foreach
@@ -746,21 +663,9 @@ class google_language_translator {
               $language_name_flag = 'brazil';
             }
 
-            $href = '#';
-            if($glt_seo_active == '1') {
-                $current_url = network_home_url(add_query_arg(null, null));
-                switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            $href = '#'; 
+            $current_url = network_home_url(add_query_arg(null, null));
+            $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
 
             $str.="<li id='".$language_name."'><a href='".esc_url($href)."' title='".$language_name."' class='nturl notranslate ".$language_code." flag ".$language_name_flag."'></a></li>";
           } //endif
@@ -785,21 +690,8 @@ class google_language_translator {
                 $language_name_flag = 'brazil';
               }
 
-              $href = '#';
-              if($glt_seo_active == '1') {
-                  $current_url = network_home_url(add_query_arg(null, null));
-                  switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                  }
-              }
+              $current_url = network_home_url(add_query_arg(null, null));
+              $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
 
               $str.='<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
             } //foreach
@@ -822,21 +714,8 @@ class google_language_translator {
                 $language_name_flag = 'brazil';
               }
 
-              $href = '#';
-              if($glt_seo_active == '1') {
-                  $current_url = network_home_url(add_query_arg(null, null));
-                  switch($glt_url_structure) {
-                    case 'sub_directory':
-                        $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
-                        break;
-                    case 'sub_domain':
-                        $domain = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-                        $href = ($language_code == $default_language) ? $current_url : str_ireplace('://' . $_SERVER['HTTP_HOST'], '://' . $language_code . '.' . $domain, $current_url);
-                        break;
-                    default:
-                        break;
-                  }
-              }
+              $current_url = network_home_url(add_query_arg(null, null));
+              $href = ($language_code == $default_language) ? $current_url : '/' . $language_code . $_SERVER['REQUEST_URI'];
 
               $str.='<li id="'.$language_name.'"><a href="'.esc_url($href).'" title="'.$language_name.'" class="nturl notranslate '.$language_code.' flag '.$language_name_flag.'"></a></li>';
             }//foreach

@@ -39,10 +39,10 @@ if($glang == $main_lang) {
     exit;
 }
 
-$page_url = $server.'.tdn.gtranslate.net' . $page_url;
+// $page_url = $server.'.tdn.gtranslate.net' . $page_url;
 
-$protocol = ((isset($_SERVER['HTTPS']) and ($_SERVER['HTTPS'] == 'on' or $_SERVER['HTTPS'] == 1)) or (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https' : 'http';
-$page_url = $protocol . '://' . $page_url;
+// $protocol = ((isset($_SERVER['HTTPS']) and ($_SERVER['HTTPS'] == 'on' or $_SERVER['HTTPS'] == 1)) or (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https' : 'http';
+// $page_url = $protocol . '://' . $page_url;
 
 if(!in_array(strtolower($glang), array('en','ar','bg','zh-cn','zh-tw','hr','cs','da','nl','fi','fr','de','el','hi','it','ja','ko','no','pl','pt','ro','ru','es','sv','ca','tl','iw','id','lv','lt','sr','sk','sl','uk','vi','sq','et','gl','hu','mt','th','tr','fa','af','ms','sw','ga','cy','be','is','mk','yi','hy','az','eu','ka','ht','ur','bn','bs','ceb','eo','gu','ha','hmn','ig','jw','kn','km','lo','la','mi','mr','mn','ne','pa','so','ta','te','yo','zu','my','ny','kk','mg','ml','si','st','su','tg','uz','am','co','haw','ku','ky','lb','ps','sm','gd','sn','sd','fy','xh')))
     exit;
@@ -70,7 +70,8 @@ if(isset($request_headers['X-GT-Lang']) or isset($request_headers['X-Gt-Lang']) 
     exit;
 }
 
-$host = $glang . '.' . preg_replace('/^www\./', '', $_SERVER['HTTP_HOST']);
+$host = preg_replace('/^www\./', '', $_SERVER['HTTP_HOST']);
+
 $request_headers['Host'] = $host;
 if(isset($request_headers['HOST'])) unset($request_headers['HOST']);
 if(isset($request_headers['host'])) unset($request_headers['host']);
@@ -142,14 +143,17 @@ if(!function_exists('curl_init')) {
 
 // proxy request
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $page_url);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_URL, "https://crypto.localhost{$page_url}");
+// curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-if(defined('CURL_IPRESOLVE_V4')) curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__).'/cacert.pem');
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
+// if(defined('CURL_IPRESOLVE_V4')) curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+// curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__).'/cacert.pem');
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'POST': {
@@ -261,6 +265,15 @@ if(isset($_GET['language_edit'])) {
     $html = str_replace('/tdn-static/', $protocol . '://tdns.gtranslate.net/tdn-static/', $html);
     $html = str_replace('/tdn-bin/', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/' . $glang . '/tdn-bin/', $html);
 }
+
+require './langs.php';
+$lang_name = $languages_array[$glang];
+$html = str_replace('</body>', '<script> 
+        default_lang = "'.$main_lang.'";
+        lang_text = "'.$lang_name.'"; 
+        lang_prefix = "'.$glang.'"; 
+        doGoogleLanguageTranslator(default_lang + "|" + lang_prefix);
+</script></body>', $html);
 
 if(function_exists('gzencode') and isset($return_gz) and $return_gz and zlib_get_coding_type() == false)
     echo gzencode($html);

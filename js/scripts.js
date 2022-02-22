@@ -17,6 +17,24 @@ function GLTFireEvent(lang_pair, lang_dest) {
     } catch (e) {}
 }
 
+
+function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+  var startTimeInMs = Date.now();
+  (function loopSearch() {
+    if (document.querySelector(selector) != null) {
+      callback();
+      return;
+    }
+    else {
+      setTimeout(function () {
+        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+          return;
+        loopSearch();
+      }, checkFrequencyInMs);
+    }
+  })();
+}
+
 function doGoogleLanguageTranslator(lang_pair) {
     if(window.glt_request_uri) return true;
 
@@ -24,37 +42,43 @@ function doGoogleLanguageTranslator(lang_pair) {
     if (lang_pair == '') return;
     var lang_dest = lang_pair.split('|')[1];
     var event;
+    
+    waitForElementToDisplay(".goog-te-combo",function(){
+
+
     var classic = jQuery('.goog-te-combo');
-    var simple = jQuery('.goog-te-menu-frame:first');
-    var simpleValue = simple.contents().find('.goog-te-menu2-item span.text:contains('+lang_text+')');
-    if (classic.length == 0) {
-      for (var i = 0; i < simple.length; i++) {
-        event = simple[i];
-        //alert('Simple is active.');
-      }
-    } else {
-      for (var i = 0; i < classic.length; i++) {
-        event = classic[i];
-        //alert('Classic is active.');
-      }
-    }
-    if (document.getElementById('google_language_translator') != null) {
-      if (classic.length != 0) {
-        if (lang_prefix != default_lang) {
-          event.value = lang_dest;
-          GLTFireEvent(event, 'change');
-        } else {
-          jQuery('.goog-te-banner-frame:first').contents().find('.goog-close-link').get(0).click();
+    
+        var simple = jQuery('.goog-te-menu-frame:first');
+        var simpleValue = simple.contents().find('.goog-te-menu2-item span.text:contains('+lang_text+')');
+        if (classic.length == 0) {
+        for (var i = 0; i < simple.length; i++) {
+            event = simple[i];
+            //alert('Simple is active.');
         }
-      } else {
-        event.value = lang_dest;
-        if (lang_prefix != default_lang) {
-          simpleValue.click();
         } else {
-          jQuery('.goog-te-banner-frame:first').contents().find('.goog-close-link').get(0).click();
+        for (var i = 0; i < classic.length; i++) {
+            event = classic[i];
+            //alert('Classic is active.');
         }
-      }
-    }
+        }
+        if (document.getElementById('google_language_translator') != null) {
+        if (classic.length != 0) {
+            if (lang_prefix != default_lang) {
+            event.value = lang_dest;
+            GLTFireEvent(event, 'change');
+            } else {
+            jQuery('.goog-te-banner-frame:first').contents().find('.goog-close-link').get(0).click();
+            }
+        } else {
+            event.value = lang_dest;
+            if (lang_prefix != default_lang) {
+            simpleValue.click();
+            } else {
+            jQuery('.goog-te-banner-frame:first').contents().find('.goog-close-link').get(0).click();
+            }
+        }
+        }
+    },1000,9000);
 }
 
 jQuery(document).ready(function($) {
@@ -139,14 +163,14 @@ if ( typeof Object.create !== 'function' ) {
 
             if (self.options.event == 'onload') {
                 $(window).load(function(event) {
-                    event.preventDefault();
+                   event.preventDefault();
                     self.show();
                 });
             }
 
             if (self.options.event == 'click') {
                 self.$elem.on('click', function(event) {
-                    event.preventDefault();
+                   event.preventDefault();
                     if(self.$elem.hasClass('pressed')) {
                         self.hide();
                     } else {
@@ -219,7 +243,7 @@ if ( typeof Object.create !== 'function' ) {
             location.html(content);
             location.find('.tool-item').on('click', function(event) {
                 if(typeof window.glt_request_uri == 'undefined')
-                    event.preventDefault();
+               //     event.preventDefault();
                 self.$elem.trigger('toolbarItemClick', this);
             });
         },
