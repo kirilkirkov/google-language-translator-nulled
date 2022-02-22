@@ -143,7 +143,7 @@ if(!function_exists('curl_init')) {
 
 // proxy request
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://crypto.localhost{$page_url}");
+curl_setopt($ch, CURLOPT_URL, "https://".$_SERVER['HTTP_HOST']."{$page_url}");
 // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
